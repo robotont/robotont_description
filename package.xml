@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<package>
+    <name>robotont_description</name>
+    <version>0.0.5</version>
+    <description>The robotont_description package</description>
+    <maintainer email="madis.kaspar.nigol@ut.ee">Madis Kaspar Nigol</maintainer>
+    <license>Apache 2.0</license>
+    <buildtool_depend>catkin</buildtool_depend>
+</package>
