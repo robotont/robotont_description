@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <robot
     xmlns:xacro="http://ros.org/wiki/xacro">
-    <xacro:include filename="$(find robotont_description)/xacro/roller.urdf.xacro"/>
+    <xacro:include filename="$(find robotont_description)/urdf/roller.urdf.xacro"/>
     <!-- Roller positioning -->
     <xacro:property name="roller_radial_dist" value="0.0275" />
     <xacro:property name="roller_z_distance" value="0.008" />

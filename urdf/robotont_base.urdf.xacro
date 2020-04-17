@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="robotont">
     <xacro:arg name="prefix" default=""/>
     <xacro:property name= "prefix" value="$(arg prefix)"/>
-    <xacro:include filename="$(find robotont_description)/xacro/rim.urdf.xacro"/>
+    <xacro:include filename="$(find robotont_description)/urdf/rim.urdf.xacro"/>
     <xacro:property name="wheel_distance" value="0.146" />
     <xacro:property name="wheel_center_height" value="0.021" />
     <link name="${prefix}base_footprint"/>
