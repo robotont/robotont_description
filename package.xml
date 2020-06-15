@@ -11,7 +11,7 @@
 
   <url type="website">https://wiki.ros.org/robotont</url>
   <url type="website">http://robotont.ut.ee</url>
-  <url type="repository">http://github.com/robotont/robotont_driver</url>
+  <url type="repository">http://github.com/robotont/robotont_description</url>
 
   <license>Apache 2.0</license>
 

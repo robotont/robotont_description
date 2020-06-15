@@ -1,7 +1,7 @@
-# robotont_description
+# robotont\_description
 
 Description package for robotont that contains meshes, URDF and xacro files.
 
-Visualizing the robot on Rviz:
--Open terminal window:<br/>
+Visualizing the robot on RViz:
+* Open terminal window:<br/>
 ```roslaunch robotont_description display.launch```
