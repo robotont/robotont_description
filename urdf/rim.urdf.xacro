@@ -176,9 +176,5 @@
 			prefix="${prefix}"
 		/>
         <!-- <transmission name="rim_${name}_transmission"><type>transmission_interface/SimpleTransmission</type><joint name="rim_${name}_joint"><hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface></joint><actuator name="rim_${name}_motor"><mechanicalReduction>1</mechanicalReduction></actuator></transmission> -->
-        <gazebo reference="${prefix}rim_${name}_link">
-            <material>Gazebo/DarkGrey</material>
-            <!-- <kp>1000000</kp><kd>100</kd> -->
-        </gazebo>
     </xacro:macro>
 </robot>

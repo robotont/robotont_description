@@ -43,8 +43,5 @@
 				rpy="0 0 ${-1*z_distance_reflect*(init_angle+no_of_roller*2*pi/7)}"
 			/>
         </joint>
-        <gazebo reference="${prefix}roller_${name}_rim_${parent}_link">
-            <material>Robotont/DarkGreen</material>
-        </gazebo>
     </xacro:macro>
 </robot>
