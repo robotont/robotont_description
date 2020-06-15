@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>robotont_driver</name>
+  <name>robotont_description</name>
   <version>0.0.5</version>
   <description>The robotont_description package</description>
 
