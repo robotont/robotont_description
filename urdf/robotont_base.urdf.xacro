@@ -3,21 +3,12 @@
     <xacro:arg name="prefix" default=""/>
     <xacro:property name= "prefix" value="$(arg prefix)"/>
     <xacro:include filename="$(find robotont_description)/urdf/rim.urdf.xacro"/>
-    <xacro:property name="wheel_distance" value="0.146" />
-    <xacro:property name="wheel_center_height" value="0.021" />
+    <xacro:property name="wheel_distance" value="0.146"/>
+    <xacro:property name="wheel_center_height" value="0.021"/>
+    
     <link name="${prefix}base_footprint"/>
+    
     <link name="${prefix}base_link">
-        <inertial>
-            <mass value="3"/>
-            <inertia
-			ixx="0.00002035985530754"
-			ixy="0"
-			ixz="0"
-			iyy="0.00002035985530754"
-			iyz="0"
-			izz="0.00003945961663220"
-		/>
-        </inertial>
         <visual>
             <geometry>
                 <mesh scale="0.001 0.001 0.001" filename="package://robotont_description/meshes/body.stl"/>
@@ -29,50 +20,29 @@
         </visual>
         <collision>
             <geometry>
-                <mesh scale=" 0.001 0.001 0.001" filename="package://robotont_description/meshes/simplebody.stl"/>
+                <mesh scale="0.001 0.001 0.001" filename="package://robotont_description/meshes/simplebody.stl"/>
             </geometry>
-            <origin rpy="${pi/2} 0 0"  xyz="0 0 0"/>
+            <origin rpy="${pi/2} 0 ${pi/2}"  xyz="0 0 0"/>
         </collision>
+        <inertial>
+            <mass value="3"/>
+            <inertia
+			    ixx="0.00002035985530754"
+			    ixy="0"
+			    ixz="0"
+			    iyy="0.00002035985530754"
+			    iyz="0"
+			    izz="0.00003945961663220"
+		    />
+        </inertial>
     </link>
-    <joint
-		name="${prefix}base_joint"
-		type="fixed"
-	>
-        <parent link="${prefix}base_footprint" />
-        <child link="${prefix}base_link" />
-        <origin
-			xyz="0 0 0.013"
-			rpy="0 0 0" 
-		/>
+
+    <joint name="${prefix}base_joint" type="fixed">
+        <parent link="${prefix}base_footprint"/>
+        <child link="${prefix}base_link"/>
+        <origin xyz="0 0 0.013" rpy="0 0 0"/>
     </joint>
 
-    <sensor_d435 parent="${prefix}base_link" prefix="${prefix}">
-        <origin xyz="-0.12 0 0.21" rpy="0 0 0"/>
-    </sensor_d435>
-
-    <!-- Computer -->
-    <link name="${prefix}computer_link">
-        <visual>
-            <geometry>
-                <box size="0.11 0.11 0.04"/>
-            </geometry>
-            <origin rpy="0 0 0" xyz="0 0 0"/>
-            <material name="computer_material">
-                <color rgba="0.1 0.1 0.1 1"/>
-            </material>
-        </visual>
-    </link>
-    <joint
-		name="${prefix}computer_joint"
-		type="fixed"
-	>
-        <parent link="${prefix}base_link" />
-        <child link="${prefix}computer_link" />
-        <origin
-			xyz="-0.01 0 0.085"
-			rpy="0 0 0" 
-		/>
-    </joint>
     <!-- Wheels -->
     <xacro:rim_macro
 		name="back"
@@ -100,63 +70,4 @@
         prefix="${prefix}"
 
 	/>
-    <!-- Initialize controller manager and odometry-->
-    <!-- libgazebo_ros_planar_move.so -->
-    <gazebo>
-        <plugin name="robotont_controller" filename="libgazebo_ros_planar_move.so">
-            <commandTopic>/robotont/cmd_vel</commandTopic>
-            <odometryTopic>/robotont/odom</odometryTopic>
-            <odometryFrame>odom</odometryFrame>
-            <odometryRate>30.0</odometryRate>
-            <robotBaseFrame>${prefix}base_footprint</robotBaseFrame>
-        </plugin>
-    </gazebo>
-    <!-- Give materials to links -->
-    <gazebo reference="${prefix}base_link">
-        <material>Robotont/BlueishTransparent</material>
-    </gazebo>
-    <gazebo reference="${prefix}camera_link">
-        <material>Gazebo/Grey</material>
-    </gazebo>
-    <gazebo reference="${prefix}computer_link">
-        <material>Gazebo/Black</material>
-    </gazebo>
-    <!-- Depth camera plugin -->
-    <gazebo reference="${prefix}camera_link">
-        <sensor type="depth" name="camera">
-            <always_on>true</always_on>
-            <update_rate>10.0</update_rate>
-            <camera>
-                <horizontal_fov>${90.0*pi/180.0}</horizontal_fov>
-                <image>
-                    <format>B8G8R8</format>
-                    <width>640</width>
-                    <height>480</height>
-                </image>
-                <clip>
-                    <near>0.02</near>
-                    <far>8.0</far>
-                </clip>
-            </camera>
-            <plugin name="kinect_camera_controller" filename="libgazebo_ros_openni_kinect.so">
-                <robotNamespace>/</robotNamespace>
-                <cameraName>camera</cameraName>
-                <alwaysOn>true</alwaysOn>
-                <updateRate>0.0</updateRate>
-                <imageTopicName>color/image_raw</imageTopicName>
-                <depthImageTopicName>depth/image_raw</depthImageTopicName>
-                <pointCloudTopicName>depth/points</pointCloudTopicName>
-                <cameraInfoTopicName>color/camera_info</cameraInfoTopicName>
-                <depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
-                <frameName>camera_depth_optical_frame</frameName>
-                <baseline>0.1</baseline>
-                <distortion_k1>0.0</distortion_k1>
-                <distortion_k2>0.0</distortion_k2>
-                <distortion_k3>0.0</distortion_k3>
-                <distortion_t1>0.0</distortion_t1>
-                <distortion_t2>0.0</distortion_t2>
-                <pointCloudCutoff>0.4</pointCloudCutoff>
-            </plugin>
-        </sensor>
-    </gazebo>
-</robot>
+ </robot>

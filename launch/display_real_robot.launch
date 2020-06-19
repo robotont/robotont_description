@@ -1,0 +1,5 @@
+<?xml version="1.0" ?>
+<launch>
+  <param name="robot_description" command="$(find xacro)/xacro $(find robotont_description)/urdf/robotont_base.urdf.xacro"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robotont_description)/config/robotont_description.rviz"/>
+</launch>
