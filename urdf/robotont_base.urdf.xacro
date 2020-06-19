@@ -3,21 +3,12 @@
     <xacro:arg name="prefix" default=""/>
     <xacro:property name= "prefix" value="$(arg prefix)"/>
     <xacro:include filename="$(find robotont_description)/urdf/rim.urdf.xacro"/>
-    <xacro:property name="wheel_distance" value="0.146" />
-    <xacro:property name="wheel_center_height" value="0.021" />
+    <xacro:property name="wheel_distance" value="0.146"/>
+    <xacro:property name="wheel_center_height" value="0.021"/>
+    
     <link name="${prefix}base_footprint"/>
+    
     <link name="${prefix}base_link">
-        <inertial>
-            <mass value="3"/>
-            <inertia
-			ixx="0.00002035985530754"
-			ixy="0"
-			ixz="0"
-			iyy="0.00002035985530754"
-			iyz="0"
-			izz="0.00003945961663220"
-		/>
-        </inertial>
         <visual>
             <geometry>
                 <mesh scale="0.001 0.001 0.001" filename="package://robotont_description/meshes/body.stl"/>
@@ -29,21 +20,27 @@
         </visual>
         <collision>
             <geometry>
-                <mesh scale=" 0.001 0.001 0.001" filename="package://robotont_description/meshes/simplebody.stl"/>
+                <mesh scale="0.001 0.001 0.001" filename="package://robotont_description/meshes/simplebody.stl"/>
             </geometry>
             <origin rpy="${pi/2} 0 ${pi/2}"  xyz="0 0 0"/>
         </collision>
+        <inertial>
+            <mass value="3"/>
+            <inertia
+			    ixx="0.00002035985530754"
+			    ixy="0"
+			    ixz="0"
+			    iyy="0.00002035985530754"
+			    iyz="0"
+			    izz="0.00003945961663220"
+		    />
+        </inertial>
     </link>
-    <joint
-		name="${prefix}base_joint"
-		type="fixed"
-	>
-        <parent link="${prefix}base_footprint" />
-        <child link="${prefix}base_link" />
-        <origin
-			xyz="0 0 0.013"
-			rpy="0 0 0" 
-		/>
+
+    <joint name="${prefix}base_joint" type="fixed">
+        <parent link="${prefix}base_footprint"/>
+        <child link="${prefix}base_link"/>
+        <origin xyz="0 0 0.013" rpy="0 0 0"/>
     </joint>
 
     <!-- Wheels -->
