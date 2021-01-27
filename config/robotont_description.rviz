@@ -7,7 +7,6 @@ Panels:
         - /Global Options1
         - /Status1
         - /RobotModel1
-        - /Axes1
       Splitter Ratio: 0.5
     Tree Height: 726
   - Class: rviz/Selection
@@ -304,13 +303,6 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
-    - Class: rviz/Axes
-      Enabled: true
-      Length: 0.20000000298023224
-      Name: Axes
-      Radius: 0.019999999552965164
-      Reference Frame: base_link
-      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -327,14 +319,14 @@ Visualization Manager:
     - Class: rviz/Measure
     - Class: rviz/SetInitialPose
       Theta std deviation: 0.2617993950843811
-      Topic: /initialpose
+      Topic: initialpose
       X std deviation: 0.5
       Y std deviation: 0.5
     - Class: rviz/SetGoal
-      Topic: /move_base_simple/goal
+      Topic: move_base_simple/goal
     - Class: rviz/PublishPoint
       Single click: true
-      Topic: /clicked_point
+      Topic: clicked_point
   Value: true
   Views:
     Current:
