@@ -1,7 +1,7 @@
 # robotont\_description
 Description package for robotont that contains meshes, URDF and xacro files.
 
-[![Build Status](https://travis-ci.com/robotont/robotont_description.svg?branch=melodic-devel)](https://travis-ci.com/robotont/robotont_description)
+[![CI](https://github.com/robotont/robotont_description/actions/workflows/industrial_ci_action.yml/badge.svg)](https://github.com/robotont/robotont_description/actions/workflows/industrial_ci_action.yml)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 Visualizing the simulated robot on RViz:
