@@ -6,4 +6,4 @@ Description package for robotont that contains meshes, URDF and xacro files.
 
 Visualizing the simulated robot on RViz:
 * Open terminal window:<br/>
-```ros2 launchlaunch robotont_description display_simulated_robot.launch```
+```ros2 launch robotont_description display_simulated_robot.launch```
