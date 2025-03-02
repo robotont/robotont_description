@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <xacro:macro name="base_macro" params="color frame_height frame_ground_clearance prefix">
+        <link name="${prefix}base_link">
+            <visual>
+                <origin rpy="0 0 ${pi/2}" xyz="0 0 ${frame_ground_clearance}"/>
+                <geometry>
+                    <mesh filename="package://robotont_description/meshes/gen2_1/frame_module.STL"/>
+                </geometry>
+                <material name="base_material">
+                    <color rgba="${color}"/>
+                </material>
+            </visual>
+            <collision>
+                <geometry>
+                    <mesh filename="package://robotont_description/meshes/shared/collision_body.STL"/>
+                </geometry>
+                <origin rpy="${pi/2} 0 ${pi/2}"/>
+            </collision>
+            <inertial>
+                <mass value="3"/>
+                <inertia
+                    ixx="0.02462503"
+                    ixy="0"
+                    ixz="0"
+                    iyy="0.02082228"
+                    iyz="0"
+                    izz="0.04324237"
+                />
+            </inertial>
+        </link>
+
+        <joint name="${prefix}base_joint" type="fixed">
+            <parent link="${prefix}base_footprint"/>
+            <child link="${prefix}base_link"/>
+            <origin xyz="0 0 ${frame_ground_clearance}" rpy="0 0 0"/>
+        </joint>
+    </xacro:macro>
+</robot>

@@ -1,19 +1,21 @@
 <?xml version="1.0" ?>
 <robot
     xmlns:xacro="http://ros.org/wiki/xacro">
-    <xacro:include filename="$(find robotont_description)/urdf/roller.urdf.xacro"/>
-    <!-- Roller positioning -->
+    <xacro:include filename="$(find robotont_description)/urdf/shared/roller.urdf.xacro"/>
+
     <xacro:property name="roller_radial_dist" value="0.0275" />
     <xacro:property name="roller_z_distance" value="0.008" />
     <xacro:property name="roller_init_angle" value="0" />
-    <xacro:macro name="rim_macro" params="name color angle wheel_distance wheel_center_height prefix">
+    <xacro:property name="wheel_height_offset" value="${wheel_center_height / 2}"/>
+
+    <xacro:macro name="rim_macro" params="name color roller_color angle wheel_distance wheel_center_height z_rotation_offset prefix">
         <link name="${prefix}rim_${name}_link">
             <visual>
                 <geometry>
-                    <mesh filename="package://robotont_description/meshes/rim.stl"/>
+                    <mesh filename="package://robotont_description/meshes/shared/rim.STL"/>
                 </geometry>
                 <material name="rim_${name}_material">
-                    <color rgba="${color} 1"/>
+                    <color rgba="${color}"/>
                 </material>
             </visual>
             <collision>
@@ -22,7 +24,7 @@
                 </geometry>
             </collision>
             <inertial>
-                <origin xyz="0 0 0"/>
+                <origin xyz="0 ${wheel_height_offset} 0"/>
                 <mass value="0.00835758"/>
                 <inertia
                     ixx="6.63684e-07"
@@ -40,14 +42,15 @@
             <child link="${prefix}rim_${name}_link" />
             <axis xyz="0 0 1"/>
             <origin
-                xyz="${wheel_distance*sin(angle)} ${-wheel_distance*cos(angle)} ${wheel_center_height}"
-                rpy="${pi/2} 0 ${angle+pi}"
+                xyz="${wheel_distance * sin(angle)} ${ -wheel_distance * cos(angle)} ${wheel_center_height + wheel_height_offset}"
+                rpy="${pi/2} 0 ${angle + pi + z_rotation_offset}"
             />
         </joint>
 
         <!-- Front rollers -->
         <xacro:roller_macro
             parent="${name}"
+            color="${roller_color}"
             radial_dist="${roller_radial_dist}"
             z_distance="${roller_z_distance}"
             z_distance_reflect="-1"
@@ -57,6 +60,7 @@
         />
         <xacro:roller_macro
             parent="${name}"
+            color="${roller_color}"
             radial_dist="${roller_radial_dist}"
             z_distance="${roller_z_distance}"
             z_distance_reflect="-1"
@@ -66,6 +70,7 @@
         />
         <xacro:roller_macro
             parent="${name}"
+            color="${roller_color}"
             radial_dist="${roller_radial_dist}"
             z_distance="${roller_z_distance}"
             z_distance_reflect="-1"
@@ -75,6 +80,7 @@
         />
         <xacro:roller_macro
             parent="${name}"
+            color="${roller_color}"
             radial_dist="${roller_radial_dist}"
             z_distance="${roller_z_distance}"
             z_distance_reflect="-1"
@@ -84,6 +90,7 @@
         />
         <xacro:roller_macro
             parent="${name}"
+            color="${roller_color}"
             radial_dist="${roller_radial_dist}"
             z_distance="${roller_z_distance}"
             z_distance_reflect="-1"
@@ -93,6 +100,7 @@
         />
         <xacro:roller_macro
             parent="${name}"
+            color="${roller_color}"
             radial_dist="${roller_radial_dist}"
             z_distance="${roller_z_distance}"
             z_distance_reflect="-1"
@@ -102,6 +110,7 @@
         />
         <xacro:roller_macro
             parent="${name}"
+            color="${roller_color}"
             radial_dist="${roller_radial_dist}"
             z_distance="${roller_z_distance}"
             z_distance_reflect="-1"
@@ -112,6 +121,7 @@
         <!-- Back rollers -->
         <xacro:roller_macro
             parent="${name}"
+            color="${roller_color}"
             radial_dist="${roller_radial_dist}"
             z_distance="${roller_z_distance}"
             z_distance_reflect="1"
@@ -121,6 +131,7 @@
         />
         <xacro:roller_macro
             parent="${name}"
+            color="${roller_color}"
             radial_dist="${roller_radial_dist}"
             z_distance="${roller_z_distance}"
             z_distance_reflect="1"
@@ -130,6 +141,7 @@
         />
         <xacro:roller_macro
             parent="${name}"
+            color="${roller_color}"
             radial_dist="${roller_radial_dist}"
             z_distance="${roller_z_distance}"
             z_distance_reflect="1"
@@ -139,6 +151,7 @@
         />
         <xacro:roller_macro
             parent="${name}"
+            color="${roller_color}"
             radial_dist="${roller_radial_dist}"
             z_distance="${roller_z_distance}"
             z_distance_reflect="1"
@@ -148,6 +161,7 @@
         />
         <xacro:roller_macro
             parent="${name}"
+            color="${roller_color}"
             radial_dist="${roller_radial_dist}"
             z_distance="${roller_z_distance}"
             z_distance_reflect="1"
@@ -157,6 +171,7 @@
         />
         <xacro:roller_macro
             parent="${name}"
+            color="${roller_color}"
             radial_dist="${roller_radial_dist}"
             z_distance="${roller_z_distance}"
             z_distance_reflect="1"
@@ -166,6 +181,7 @@
         />
         <xacro:roller_macro
             parent="${name}"
+            color="${roller_color}"
             radial_dist="${roller_radial_dist}"
             z_distance="${roller_z_distance}"
             z_distance_reflect="1"
@@ -173,6 +189,5 @@
             no_of_roller="6"
             prefix="${prefix}"
         />
-        <!-- <transmission name="rim_${name}_transmission"><type>transmission_interface/SimpleTransmission</type><joint name="rim_${name}_joint"><hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface></joint><actuator name="rim_${name}_motor"><mechanicalReduction>1</mechanicalReduction></actuator></transmission> -->
     </xacro:macro>
 </robot>

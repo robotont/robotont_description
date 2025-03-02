@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<robot
+    xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:property name="button_height" value="0.037"/>
+    <xacro:property name="extrude_radius" value="0.0125"/>
+
+    <xacro:macro name="e_button_macro" params="color frame_ground_clearance frame_height prefix">
+        <xacro:property name="ground_clearance" value="${frame_ground_clearance + frame_height}"/>
+
+        <link name="${prefix}e_button_link">
+            <visual>
+                <geometry>
+                    <mesh filename="package://robotont_description/meshes/gen3/e_stop_button.STL"/>
+                </geometry>
+                <material name="button_material">
+                    <color rgba="${color}"/>
+                </material>
+            </visual>
+            <collision>
+                <origin rpy="${pi / 2} 0 0"/>
+                <geometry>
+                    <cylinder radius="${extrude_radius}" length="${button_height}"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="e_button_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}e_button_link"/>
+            <axis xyz="0 0 1"/>
+            <origin
+                xyz="0.0075 0.115 ${ground_clearance + button_height / 8}"
+                rpy="${pi / 2} 0 ${pi / 2}"
+            />
+        </joint>
+    </xacro:macro>
+</robot>
