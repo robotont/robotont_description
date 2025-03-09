@@ -1,22 +1,18 @@
-name: CI
+name: build
 
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
-  industrial_ci:
-    env:
-      ROS_REPO: ros
-      #UPSTREAM_WORKSPACE: ".ci.rosinstall"
-      #CCACHE_DIR: $HOME/.ccache
-    strategy:
-      matrix:
-        env:
-          - {ROS_DISTRO: noetic, ROS_REPO: main}
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: 'ros-industrial/industrial_ci@master'
-        env: ${{matrix.env}}
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          path: workspace
 
-
-
+      - name: Build ROS 2 Workspace
+        uses: ichiro-its/ros2-ws-action@v1.0.0
+        with:
+          distro: jazzy
