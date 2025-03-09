@@ -2,25 +2,72 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="robotont_gen2">
     <xacro:include filename="$(find robotont_description)/urdf/shared/rim.urdf.xacro"/>
     <xacro:include filename="$(find robotont_description)/urdf/gen2_1/base.urdf.xacro"/>
+    <xacro:include filename="$(find robotont_description)/urdf/gen2_1/motor.urdf.xacro"/>
 
     <xacro:arg name="prefix" default=""/>
     <xacro:property name="prefix" value="$(arg prefix)"/>
 
     <xacro:property name="wheel_distance" value="0.146"/>
     <xacro:property name="wheel_center_height" value="0.021"/>
+    <xacro:property name="wheel_length" value="0.0225"/>
     <xacro:property name="roller_color" value="0.45 0.7 0.5 1.0"/>
     <xacro:property name="rim_color" value="0.26 0.26 0.26 1.0"/>
 
     <xacro:property name="frame_height" value="0.065"/>
-    <xacro:property name="frame_ground_clearance" value="0.014"/>
+    <xacro:property name="frame_ground_clearance" value="0.01"/>
+    <xacro:property name="frame_thickness" value="0.000025"/>
     <xacro:property name="base_color" value="1.0 1.0 1.0 0.6"/>
+    <xacro:property name="e_button_color" value="1.0 0 0 0.8"/>
+    <xacro:property name="power_button_color" value="0.75 0.75 0.75 1.0"/>
 
     <link name="${prefix}base_footprint"/>
 
     <xacro:base_macro
         color="${base_color}"
+        e_button_color="${e_button_color}"
+        power_button_color="${power_button_color}"
         frame_height="${frame_height}"
         frame_ground_clearance="${frame_ground_clearance}"
+        prefix="${prefix}"
+    />
+
+    <!-- Motor modules -->
+    <xacro:motor_macro
+        name="back"
+        color="${rim_color}"
+        angle="${-3 * pi/2}"
+        z_rotation="0"
+        wheel_center_height="${wheel_center_height}"
+        frame_ground_clearance="${frame_ground_clearance}"
+        frame_thickness="${frame_thickness}"
+        distance="${-wheel_distance}"
+        gap="-0.008"
+        prefix="${prefix}"
+    />
+
+    <xacro:motor_macro
+        name="right"
+        color="${rim_color}"
+        angle="${5 * pi / 6}"
+        z_rotation="${pi}"
+        wheel_center_height="${wheel_center_height}"
+        frame_ground_clearance="${frame_ground_clearance}"
+        frame_thickness="${frame_thickness}"
+        distance="${wheel_distance}"
+        gap="-0.108"
+        prefix="${prefix}"
+    />
+
+    <xacro:motor_macro
+        name="left"
+        color="${rim_color}"
+        angle="${7 * pi / 6}"
+        z_rotation="0"
+        wheel_center_height="${wheel_center_height}"
+        frame_ground_clearance="${frame_ground_clearance}"
+        frame_thickness="${frame_thickness}"
+        distance="${-wheel_distance}"
+        gap="-0.008"
         prefix="${prefix}"
     />
 
@@ -39,19 +86,18 @@
         name="right"
         color="${rim_color}"
         roller_color="${roller_color}"
-        angle="${-1/3*pi + pi/2}"
+        angle="${5 * pi / 6}"
         wheel_distance="${wheel_distance}"
         wheel_center_height="${wheel_center_height}"
         z_rotation_offset="0"
         prefix="${prefix}"
-
     />
     <xacro:rim_macro
         name="left"
         color="${rim_color}"
         roller_color="${roller_color}"
-        angle="${1/3*pi + pi/2}"
-        wheel_distance="${wheel_distance}"
+        angle="${7 * pi / 6}"
+        wheel_distance="${-wheel_distance}"
         wheel_center_height="${wheel_center_height}"
         z_rotation_offset="0"
         prefix="${prefix}"

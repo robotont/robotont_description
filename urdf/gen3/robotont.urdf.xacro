@@ -2,10 +2,7 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="robotont_gen3">
     <xacro:include filename="$(find robotont_description)/urdf/shared/rim.urdf.xacro"/>
     <xacro:include filename="$(find robotont_description)/urdf/gen3/motor.urdf.xacro"/>
-    <xacro:include filename="$(find robotont_description)/urdf/gen3/nuc.urdf.xacro"/>
-    <xacro:include filename="$(find robotont_description)/urdf/gen3/camera.urdf.xacro"/>
     <xacro:include filename="$(find robotont_description)/urdf/gen3/base.urdf.xacro"/>
-    <xacro:include filename="$(find robotont_description)/urdf/gen3/button.urdf.xacro"/>
 
     <xacro:arg name="prefix" default=""/>
     <xacro:property name="prefix" value="$(arg prefix)"/>
@@ -22,14 +19,20 @@
     <xacro:property name="frame_ground_clearance" value="0.014"/>
     <xacro:property name="frame_thickness" value="0.000025"/>
     <xacro:property name="base_color" value="0.16 0.65 0.98 1.0"/>
-
-    <xacro:property name="nuc_frame_color" value="0.75 0.75 0.75 1.0"/>
+    <xacro:property name="pcb_color" value="0 0.55 0.29 1.0"/>
+    <xacro:property name="e_button_color" value="1.0 0 0 0.8"/>
+    <xacro:property name="power_button_color" value="0.75 0.75 0.75 1.0"/>
+    <xacro:property name="battery_module_color" value="0.26 0.26 0.26 1.0"/>
 
     <link name="${prefix}base_footprint"/>
 
     <!-- Frame module -->
     <xacro:base_macro
         color="${base_color}"
+        pcb_color="${pcb_color}"
+        e_button_color="${e_button_color}"
+        power_button_color="${power_button_color}"
+        battery_module_color="${battery_module_color}"
         frame_height="${frame_height}"
         frame_ground_clearance="${frame_ground_clearance}"
         prefix="${prefix}"
@@ -108,30 +111,6 @@
         wheel_distance="${wheel_distance_front}"
         wheel_center_height="${wheel_center_height}"
         z_rotation_offset="${-wheel_z_rotation_offset}"
-        prefix="${prefix}"
-    />
-
-    <!-- Computer module -->
-    <xacro:nuc_macro
-        color="${nuc_frame_color}"
-        frame_height="${frame_height}"
-        frame_ground_clearance="${frame_ground_clearance}"
-        prefix="${prefix}"
-    />
-
-    <!-- Camera module -->
-    <xacro:camera_macro
-        color="${nuc_frame_color}"
-        frame_height="${frame_height}"
-        frame_ground_clearance="${frame_ground_clearance}"
-        prefix="${prefix}"
-    />
-
-    <!-- E-button -->
-    <xacro:e_button_macro
-        color="1.0 0 0 1.0"
-        frame_height="${frame_height}"
-        frame_ground_clearance="${frame_ground_clearance}"
         prefix="${prefix}"
     />
 </robot>

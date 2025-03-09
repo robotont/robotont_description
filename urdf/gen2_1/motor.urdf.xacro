@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<robot
+    xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:property name="length" value="0.0946"/>
+
+    <xacro:macro name="motor_macro" params="name color angle wheel_center_height frame_ground_clearance frame_thickness distance gap z_rotation prefix">
+        <xacro:property name="ground_clearance" value="${1.5 * wheel_center_height + frame_ground_clearance + frame_thickness}"/>
+        <xacro:property name="distance_from_center" value="${distance + (wheel_center_height / 2) + (length / 2) + gap}"/>
+
+        <link name="${prefix}motor_${name}_link">
+            <visual>
+                <geometry>
+                    <mesh filename="package://robotont_description/meshes/gen2_1/motor_module.STL"/>
+                </geometry>
+                <material name="motor_${name}_material">
+                    <color rgba="${color}"/>
+                </material>
+            </visual>
+        </link>
+
+        <joint name="motor_${name}_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}motor_${name}_link"/>
+            <axis xyz="0 0 1"/>
+            <origin
+                xyz="${distance_from_center * sin(angle)} ${-distance_from_center * cos(angle)} ${ground_clearance}"
+                rpy="${pi/2} 0 ${angle + pi + z_rotation}"
+            />
+        </joint>
+    </xacro:macro>
+</robot>

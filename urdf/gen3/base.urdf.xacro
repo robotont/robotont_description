@@ -1,10 +1,24 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:property name="pcb_offset" value="0.044"/>
+    <xacro:property name="e_button_offset" value="0.0035"/>
 
-    <xacro:macro name="base_macro" params="color frame_height frame_ground_clearance prefix">
+    <xacro:macro name="base_macro" params="
+        color
+        pcb_color
+        e_button_color
+        power_button_color
+        battery_module_color
+        frame_height
+        frame_ground_clearance
+        prefix
+    ">
+        <xacro:property name="frame_elevation" value="${frame_height / 2 + frame_ground_clearance}"/>
+
+        <!-- Frame -->
         <link name="${prefix}base_link">
             <visual>
-                <origin rpy="0 0 ${pi/2}" xyz="0 0 ${frame_height / 2 + frame_ground_clearance}"/>
+                <origin rpy="0 0 ${pi/2}" xyz="0 0 ${frame_elevation}"/>
                 <geometry>
                     <mesh filename="package://robotont_description/meshes/gen3/frame_module.STL"/>
                 </geometry>
@@ -16,7 +30,7 @@
                 <geometry>
                     <mesh filename="package://robotont_description/meshes/shared/collision_body.STL"/>
                 </geometry>
-                <origin rpy="${pi/2} 0 ${pi/2}" xyz="0 0 ${frame_height / 2 + frame_ground_clearance}"/>
+                <origin rpy="${pi/2} 0 ${pi/2}" xyz="0 0 ${frame_elevation}"/>
             </collision>
             <inertial>
                 <mass value="3"/>
@@ -34,7 +48,92 @@
         <joint name="${prefix}base_joint" type="fixed">
             <parent link="${prefix}base_footprint"/>
             <child link="${prefix}base_link"/>
-            <origin xyz="0 0 0.013" rpy="0 0 0"/>
+            <origin xyz="0 0 ${frame_elevation}" rpy="0 0 0"/>
+        </joint>
+
+        <!-- PCB -->
+        <link name="${prefix}pcb_link">
+            <visual>
+                <origin rpy="0 0 ${pi/2}" xyz="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://robotont_description/meshes/gen3/PCB.STL"/>
+                </geometry>
+                <material name="pcb_material">
+                    <color rgba="${pcb_color}"/>
+                </material>
+            </visual>
+        </link>
+
+        <joint name="${prefix}pcb_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}pcb_link"/>
+            <origin xyz="0.0025 0 ${frame_ground_clearance + pcb_offset}" rpy="0 ${pi / 2} 0"/>
+        </joint>
+
+        <!-- E-button -->
+        <link name="${prefix}e_button_link">
+            <visual>
+                <geometry>
+                    <mesh filename="package://robotont_description/meshes/gen3/e_stop_button.STL"/>
+                </geometry>
+                <material name="e_button_material">
+                    <color rgba="${e_button_color}"/>
+                </material>
+            </visual>
+        </link>
+
+        <joint name="e_button_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}e_button_link"/>
+            <axis xyz="0 0 1"/>
+            <origin
+                xyz="0.0075 0.115 ${frame_ground_clearance + frame_height - e_button_offset}"
+                rpy="${pi / 2} 0 ${pi / 2}"
+            />
+        </joint>
+
+        <!-- Power button -->
+        <link name="${prefix}power_button_link">
+            <visual>
+                <geometry>
+                    <mesh filename="package://robotont_description/meshes/gen3/power_button.STL"/>
+                </geometry>
+                <material name="power_button_material">
+                    <color rgba="${power_button_color}"/>
+                </material>
+            </visual>
+        </link>
+
+        <joint name="power_button_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}power_button_link"/>
+            <axis xyz="0 0 1"/>
+            <origin
+                xyz="-0.0472 0.111 ${frame_ground_clearance + frame_height - 0.001}"
+                rpy="${pi / 2} 0 ${pi / 2}"
+            />
+        </joint>
+
+        <!-- Battery module -->
+        <link name="${prefix}battery_module_link">
+            <visual>
+                <geometry>
+                    <mesh filename="package://robotont_description/meshes/gen3/battery_module.STL"/>
+                </geometry>
+                <material name="battery_module_material">
+                    <color rgba="${battery_module_color}"/>
+                </material>
+            </visual>
+        </link>
+
+        <joint name="battery_module_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}battery_module_link"/>
+            <axis xyz="0 0 1"/>
+            <origin
+                xyz="0.08 0 ${frame_ground_clearance + frame_height + 0.0025}"
+                rpy="${pi / 2} 0 ${pi / 2}"
+            />
         </joint>
     </xacro:macro>
 </robot>
