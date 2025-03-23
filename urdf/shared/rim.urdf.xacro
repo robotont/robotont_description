@@ -12,7 +12,7 @@
         <link name="${prefix}rim_${name}_link">
             <visual>
                 <geometry>
-                    <mesh filename="package://robotont_description/meshes/shared/rim.STL"/>
+                    <mesh filename="file://$(find robotont_description)/meshes/shared/rim.STL"/>
                 </geometry>
                 <material name="rim_${name}_material">
                     <color rgba="${color}"/>
@@ -45,6 +45,7 @@
                 xyz="${wheel_distance * sin(angle)} ${ -wheel_distance * cos(angle)} ${wheel_center_height + wheel_height_offset}"
                 rpy="${pi/2} 0 ${angle + pi + z_rotation_offset}"
             />
+            <dynamics damping="0.1"/>
         </joint>
 
         <!-- Front rollers -->
