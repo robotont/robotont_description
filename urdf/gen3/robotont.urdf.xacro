@@ -92,7 +92,7 @@
         prefix="${prefix}"
     />
     <xacro:rim_macro
-        name="right"
+        name="left"
         color="${rim_color}"
         roller_color="${roller_color}"
         angle="${5 * pi / 6}"
@@ -103,10 +103,11 @@
 
     />
     <xacro:rim_macro
-        name="left"
+        name="right"
         color="${rim_color}"
         roller_color="${roller_color}"
         angle="${7 * pi / 6}"
+        flip_axis="-1"
         wheel_distance="${-wheel_distance}"
         wheel_center_height="${wheel_center_height}"
         wheel_center_offset="${wheel_center_offset}"
