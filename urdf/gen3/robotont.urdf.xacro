@@ -7,8 +7,8 @@
     <xacro:arg name="prefix" default=""/>
     <xacro:property name="prefix" value="$(arg prefix)"/>
 
-    <xacro:property name="wheel_distance_back" value="0.14"/>
-    <xacro:property name="wheel_distance_front" value="0.16"/>
+    <xacro:property name="wheel_distance" value="0.151"/>
+    <xacro:property name="wheel_center_offset" value="0.014"/>
     <xacro:property name="wheel_center_height" value="0.021"/>
     <xacro:property name="roller_color" value="0.61 0.55 0.49 1.0"/>
     <xacro:property name="rim_color" value="0.26 0.26 0.26 1.0"/>
@@ -43,41 +43,40 @@
         name="back"
         color="${rim_color}"
         angle="${-3 * pi / 2}"
-        z_rotation_offset="0"
         wheel_center_height="${wheel_center_height}"
+        wheel_center_offset="${wheel_center_offset}"
         wheel_length="${wheel_length}"
         frame_ground_clearance="${frame_ground_clearance}"
         frame_thickness="${frame_thickness}"
-        distance="${-wheel_distance_back}"
-        gap="0.0025"
+        distance="${-wheel_distance}"
         prefix="${prefix}"
     />
 
     <xacro:motor_macro
         name="right"
         color="${rim_color}"
-        angle="${-143.5 * (pi/180)}"
-        z_rotation_offset="${-wheel_z_rotation_offset}"
+        angle="${5 * pi / 6}"
+        z_rotation="${pi}"
+        position_offset="${-1}"
+        wheel_center_offset="${wheel_center_offset}"
         wheel_center_height="${wheel_center_height}"
-        wheel_length="${wheel_length}"
+        wheel_length="${-wheel_length}"
         frame_ground_clearance="${frame_ground_clearance}"
         frame_thickness="${frame_thickness}"
-        distance="${-wheel_distance_front}"
-        gap="0"
+        distance="${wheel_distance}"
         prefix="${prefix}"
     />
 
     <xacro:motor_macro
         name="left"
         color="${rim_color}"
-        angle="${-36.5 * (pi/180)}"
-        z_rotation_offset="${wheel_z_rotation_offset}"
+        angle="${7 * pi / 6}"
+        wheel_center_offset="${wheel_center_offset}"
         wheel_center_height="${wheel_center_height}"
         wheel_length="${wheel_length}"
         frame_ground_clearance="${frame_ground_clearance}"
         frame_thickness="${frame_thickness}"
-        distance="${-wheel_distance_front}"
-        gap="0"
+        distance="${-wheel_distance}"
         prefix="${prefix}"
     />
 
@@ -86,20 +85,20 @@
         name="back"
         color="${rim_color}"
         roller_color="${roller_color}"
-        angle="${3*pi/2}"
-        wheel_distance="${wheel_distance_back}"
+        angle="${3 * pi / 2}"
+        wheel_distance="${wheel_distance}"
         wheel_center_height="${wheel_center_height}"
-        z_rotation_offset="0"
+        wheel_center_offset="${wheel_center_offset}"
         prefix="${prefix}"
     />
     <xacro:rim_macro
         name="right"
         color="${rim_color}"
         roller_color="${roller_color}"
-        angle="${145 * (pi/180)}"
-        wheel_distance="${wheel_distance_front}"
+        angle="${5 * pi / 6}"
+        wheel_distance="${wheel_distance}"
         wheel_center_height="${wheel_center_height}"
-        z_rotation_offset="${wheel_z_rotation_offset}"
+        wheel_center_offset="${wheel_center_offset}"
         prefix="${prefix}"
 
     />
@@ -107,10 +106,10 @@
         name="left"
         color="${rim_color}"
         roller_color="${roller_color}"
-        angle="${35 * (pi/180)}"
-        wheel_distance="${wheel_distance_front}"
+        angle="${7 * pi / 6}"
+        wheel_distance="${-wheel_distance}"
         wheel_center_height="${wheel_center_height}"
-        z_rotation_offset="${-wheel_z_rotation_offset}"
+        wheel_center_offset="${wheel_center_offset}"
         prefix="${prefix}"
     />
 </robot>

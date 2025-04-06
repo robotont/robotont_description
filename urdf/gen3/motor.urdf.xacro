@@ -3,9 +3,22 @@
     xmlns:xacro="http://ros.org/wiki/xacro">
     <xacro:property name="length" value="0.0725"/>
 
-    <xacro:macro name="motor_macro" params="name color angle z_rotation_offset wheel_center_height wheel_length frame_ground_clearance frame_thickness distance gap prefix">
+    <xacro:macro name="motor_macro" params="
+        name
+        color
+        angle
+        z_rotation:=0
+        position_offset:=1
+        wheel_center_offset
+        wheel_center_height
+        wheel_length
+        frame_ground_clearance
+        frame_thickness
+        distance
+        prefix
+    ">
         <xacro:property name="ground_clearance" value="${1.5 * wheel_center_height + frame_ground_clearance + frame_thickness}"/>
-        <xacro:property name="distance_from_center" value="${distance + (wheel_length / 2) + (length / 2) + gap}"/>
+        <xacro:property name="distance_from_center" value="${distance + (wheel_length / 2) + ((length * position_offset) / 2)}"/>
 
         <link name="${prefix}motor_${name}_link">
             <visual>
@@ -23,8 +36,8 @@
             <child link="${prefix}motor_${name}_link"/>
             <axis xyz="0 0 1"/>
             <origin
-                xyz="${distance_from_center * sin(angle)} ${-distance_from_center * cos(angle)} ${ground_clearance}"
-                rpy="${pi/2} 0 ${angle + pi + z_rotation_offset}"
+                xyz="${distance_from_center * sin(angle) + wheel_center_offset} ${-distance_from_center * cos(angle)} ${ground_clearance}"
+                rpy="${pi/2} 0 ${angle + pi + z_rotation}"
             />
         </joint>
     </xacro:macro>
