@@ -14,7 +14,7 @@
             <visual>
                 <origin rpy="0 0 ${pi/2}" xyz="0 0 ${frame_ground_clearance}"/>
                 <geometry>
-                    <mesh filename="package://robotont_description/meshes/gen2_1/frame_module.STL"/>
+                    <mesh filename="file://$(find robotont_description)/meshes/gen2_1/frame_module.STL"/>
                 </geometry>
                 <material name="base_material">
                     <color rgba="${color}"/>
@@ -22,9 +22,9 @@
             </visual>
             <collision>
                 <geometry>
-                    <mesh filename="package://robotont_description/meshes/shared/collision_body.STL"/>
+                    <mesh filename="file://$(find robotont_description)/meshes/shared/collision_body.STL"/>
                 </geometry>
-                <origin rpy="${pi/2} 0 ${pi/2}"/>
+                <origin rpy="${pi/2} 0 ${pi/2}" xyz="-0.01 0 ${frame_ground_clearance + 0.035}"/>
             </collision>
             <inertial>
                 <mass value="3"/>
@@ -49,7 +49,7 @@
         <link name="${prefix}e_button_link">
             <visual>
                 <geometry>
-                    <mesh filename="package://robotont_description/meshes/gen3/e_stop_button.STL"/>
+                    <mesh filename="file://$(find robotont_description)/meshes/gen3/e_stop_button.STL"/>
                 </geometry>
                 <material name="e_button_material">
                     <color rgba="${e_button_color}"/>
@@ -71,7 +71,7 @@
         <link name="${prefix}power_button_link">
             <visual>
                 <geometry>
-                    <mesh filename="package://robotont_description/meshes/gen3/power_button.STL"/>
+                    <mesh filename="file://$(find robotont_description)/meshes/gen3/power_button.STL"/>
                 </geometry>
                 <material name="power_button_material">
                     <color rgba="${power_button_color}"/>
