@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
-    <xacro:property name="pcb_offset" value="0.044"/>
+    <xacro:property name="pcb_offset" value="0.0444"/>
     <xacro:property name="e_button_offset" value="0.0035"/>
 
     <xacro:macro name="base_macro" params="
         color
+        spacers_color
         pcb_color
         e_button_color
         power_button_color
@@ -13,14 +14,14 @@
         frame_ground_clearance
         prefix
     ">
-        <xacro:property name="frame_elevation" value="${frame_height / 2 + frame_ground_clearance}"/>
+        <xacro:property name="frame_elevation" value="${frame_height / 2 + frame_ground_clearance+0.004}"/>
 
         <!-- Frame -->
         <link name="${prefix}base_link">
             <visual>
-                <origin rpy="0 0 ${pi/2}" xyz="0 0 ${frame_elevation}"/>
+                <origin rpy="0 0 ${pi/2}" xyz="0.0042 0 ${frame_elevation}"/>
                 <geometry>
-                    <mesh filename="file://$(find robotont_description)/meshes/gen3/frame_module.STL"/>
+                    <mesh scale="0.001 0.001 0.001" filename="file://$(find robotont_description)/meshes/gen3/frame_module_pla.STL"/>
                 </geometry>
                 <material name="base_material">
                     <color rgba="${color}"/>
@@ -48,7 +49,25 @@
         <joint name="${prefix}base_joint" type="fixed">
             <parent link="${prefix}base_footprint"/>
             <child link="${prefix}base_link"/>
-            <origin xyz="0 0 ${frame_elevation}" rpy="0 0 0"/>
+            <origin xyz="0 0 0" rpy="0 0 ${frame_elevation}"/>
+        </joint>
+
+        <link name="${prefix}base_link_spacers">
+            <visual>
+                <origin rpy="0 0 ${pi/2}" xyz="0.0042 0 ${frame_elevation}"/>
+                <geometry>
+                    <mesh scale="0.001 0.001 0.001" filename="file://$(find robotont_description)/meshes/gen3/frame_module_spacers.STL"/>
+                </geometry>
+                <material name="spacers_material">
+                    <color rgba="${spacers_color}"/>
+                </material>
+            </visual>
+        </link>
+
+        <joint name="${prefix}base_joint_spacers" type="fixed">
+            <parent link="${prefix}base_footprint"/>
+            <child link="${prefix}base_link_spacers"/>
+            <origin xyz="0 0 0" rpy="0 0 ${frame_elevation}"/>
         </joint>
 
         <!-- PCB -->
