@@ -176,5 +176,27 @@
                 rpy="${pi / 2} 0 ${pi / 2}"
             />
         </joint>
+
+        <!-- OLED module -->
+        <link name="${prefix}screen_module_link">
+            <visual>
+                <geometry>
+                    <mesh filename="file://$(find robotont_description)/meshes/gen3/ssd1306.STL"/>
+                </geometry>
+                <material name="screen_module_material">
+                    <color rgba="${battery_module_color}"/>
+                </material>
+            </visual>
+        </link>
+
+        <joint name="screen_module_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}screen_module_link"/>
+            <axis xyz="0 0 1"/>
+            <origin
+                xyz="-0.0325 0.1185 ${frame_ground_clearance + frame_height-0.0015}"
+                rpy="0 0 0"
+            />
+        </joint>
     </xacro:macro>
 </robot>
