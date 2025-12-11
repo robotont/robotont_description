@@ -7,6 +7,9 @@
     <xacro:arg name="prefix" default=""/>
     <xacro:property name="prefix" value="$(arg prefix)"/>
 
+    
+    <xacro:property name="primary_color" value="$(arg main_color)"/>
+
     <xacro:property name="wheel_distance" value="0.151"/>
     <xacro:property name="wheel_center_offset" value="0.014"/>
     <xacro:property name="wheel_center_height" value="0.021"/>
@@ -29,7 +32,7 @@
 
     <!-- Frame module -->
     <xacro:base_macro
-        color="${base_color}"
+        color="${primary_color}"
         spacers_color="${spacers_color}"
         pcb_color="${pcb_color}"
         e_button_color="${e_button_color}"

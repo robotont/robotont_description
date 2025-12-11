@@ -14,11 +14,16 @@ def generate_launch_description():
     rviz_config_decl = DeclareLaunchArgument(name='rviz_config', default_value=str(default_rviz_config_path))
     rviz_fixed_frame_decl = DeclareLaunchArgument(name='rviz_fixed_frame', default_value='base_link')
     generation_decl = DeclareLaunchArgument(name='generation', default_value='3')
+    primary_color_decl = DeclareLaunchArgument(
+        name='primary_color',
+        default_value='0.16 0.65 0.98 1.0'   # light blue
+    )
 
     model_arg = LaunchConfiguration('model')
     rviz_config_arg = LaunchConfiguration('rviz_config')
     rviz_fixed_frame_arg = LaunchConfiguration('rviz_fixed_frame')
     generation_arg = LaunchConfiguration('generation')
+    primary_color_arg = LaunchConfiguration('primary_color')
 
     robot_model_path = PythonExpression([
         '"" if "', model_arg,
@@ -26,7 +31,7 @@ def generate_launch_description():
         '"/gen2_1/robotont.urdf.xacro" if "', generation_arg, '" == "2.1" else "/gen3/robotont.urdf.xacro")'
     ])
 
-    robot_description = ParameterValue(Command(['xacro ', robot_model_path]), value_type=str)
+    robot_description = ParameterValue(Command(['xacro ', robot_model_path, ' main_color:="', primary_color_arg, '"']), value_type=str)
 
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
@@ -58,6 +63,7 @@ def generate_launch_description():
             generation_decl,
             rviz_config_decl,
             rviz_fixed_frame_decl,
+            primary_color_decl,
             joint_state_publisher_node,
             robot_state_publisher_node,
             rviz_node

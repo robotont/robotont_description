@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
-    <xacro:property name="pcb_offset" value="0.0444"/>
+    <xacro:property name="pcb_offset" value="0.044"/>
     <xacro:property name="e_button_offset" value="0.0035"/>
 
     <xacro:macro name="base_macro" params="
@@ -14,12 +14,12 @@
         frame_ground_clearance
         prefix
     ">
-        <xacro:property name="frame_elevation" value="${frame_height / 2 + frame_ground_clearance+0.004}"/>
+        <xacro:property name="frame_elevation" value="${frame_height / 2 + frame_ground_clearance}"/>
 
         <!-- Frame -->
         <link name="${prefix}base_link">
             <visual>
-                <origin rpy="0 0 ${pi/2}" xyz="0.0042 0 ${frame_elevation}"/>
+                <origin rpy="0 0 ${pi/2}" xyz="0 0 ${frame_elevation}"/>
                 <geometry>
                     <mesh scale="0.001 0.001 0.001" filename="file://$(find robotont_description)/meshes/gen3/frame_module_pla.STL"/>
                 </geometry>
@@ -54,7 +54,7 @@
 
         <link name="${prefix}base_link_spacers">
             <visual>
-                <origin rpy="0 0 ${pi/2}" xyz="0.0042 0 ${frame_elevation}"/>
+                <origin rpy="0 0 ${pi/2}" xyz="0 0 ${frame_elevation}"/>
                 <geometry>
                     <mesh scale="0.001 0.001 0.001" filename="file://$(find robotont_description)/meshes/gen3/frame_module_spacers.STL"/>
                 </geometry>
@@ -130,6 +130,28 @@
             <origin
                 xyz="-0.0472 0.111 ${frame_ground_clearance + frame_height - 0.001}"
                 rpy="${pi / 2} 0 ${pi / 2}"
+            />
+        </joint>
+
+        <!-- Encoder button -->
+        <link name="${prefix}encoder_button_link">
+            <visual>
+                <geometry>
+                    <mesh filename="file://$(find robotont_description)/meshes/gen3/encoder_button.STL"/>
+                </geometry>
+                <material name="encoder_button_material">
+                    <color rgba="${power_button_color}"/>
+                </material>
+            </visual>
+        </link>
+
+        <joint name="encoder_button_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}encoder_button_link"/>
+            <axis xyz="0 0 1"/>
+            <origin
+                xyz="-0.07 0.12 ${frame_ground_clearance + frame_height - 0.007}"
+                rpy="0 0 0"
             />
         </joint>
 
