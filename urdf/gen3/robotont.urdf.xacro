@@ -7,7 +7,7 @@
     <xacro:arg name="prefix" default=""/>
     <xacro:property name="prefix" value="$(arg prefix)"/>
 
-    
+    <xacro:arg name="main_color"  default="0.16 0.65 0.98 1.0"/>
     <xacro:property name="primary_color" value="$(arg main_color)"/>
 
     <xacro:property name="wheel_distance" value="0.151"/>

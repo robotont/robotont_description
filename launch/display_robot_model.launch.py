@@ -16,22 +16,32 @@ def generate_launch_description():
     generation_decl = DeclareLaunchArgument(name='generation', default_value='3')
     primary_color_decl = DeclareLaunchArgument(
         name='primary_color',
-        default_value='0.16 0.65 0.98 1.0'   # light blue
+        default_value='light_blue'   # light blue
     )
 
     model_arg = LaunchConfiguration('model')
     rviz_config_arg = LaunchConfiguration('rviz_config')
     rviz_fixed_frame_arg = LaunchConfiguration('rviz_fixed_frame')
     generation_arg = LaunchConfiguration('generation')
-    primary_color_arg = LaunchConfiguration('primary_color')
+    primary_color_name = LaunchConfiguration('primary_color')
 
     robot_model_path = PythonExpression([
         '"" if "', model_arg,
         '" else "', str(package / "urdf/"), '" + (',
         '"/gen2_1/robotont.urdf.xacro" if "', generation_arg, '" == "2.1" else "/gen3/robotont.urdf.xacro")'
     ])
-
-    robot_description = ParameterValue(Command(['xacro ', robot_model_path, ' main_color:="', primary_color_arg, '"']), value_type=str)
+    primary_color_rgba = PythonExpression([
+        '"0.16 0.65 0.98 1.0" if "', primary_color_name, '" == "light_blue" else ',
+        '"0.00 0.35 0.90 1.0" if "', primary_color_name, '" == "blue" else ',
+        '"1.00 1.00 0.00 1.0" if "', primary_color_name, '" == "yellow" else ',
+        '"0.10 0.10 0.10 1.0" if "', primary_color_name, '" == "black" else ',
+        '"0.45 0.20 0.65 1.0" if "', primary_color_name, '" == "purple" else ',
+        '"0.65 0.65 0.65 1.0" if "', primary_color_name, '" == "gray" else ',
+        '"0.00 0.45 0.25 1.0" if "', primary_color_name, '" == "dark_green" else ',
+        '"0.00 0.80 0.30 1.0" if "', primary_color_name, '" == "green" else ',
+        '"0.16 0.65 0.98 1.0"'
+    ])
+    robot_description = ParameterValue(Command(['xacro ', robot_model_path, ' main_color:="', primary_color_rgba, '"']), value_type=str)
 
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
