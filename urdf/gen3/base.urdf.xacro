@@ -21,7 +21,7 @@
             <visual>
                 <origin rpy="0 0 ${pi/2}" xyz="0 0 ${frame_elevation}"/>
                 <geometry>
-                    <mesh scale="0.001 0.001 0.001" filename="file://$(find robotont_description)/meshes/gen3/frame_module_pla.STL"/>
+                    <mesh filename="file://$(find robotont_description)/meshes/gen3/frame_module_pla.STL"/>
                 </geometry>
                 <material name="base_material">
                     <color rgba="${color}"/>
@@ -56,7 +56,7 @@
             <visual>
                 <origin rpy="0 0 ${pi/2}" xyz="0 0 ${frame_elevation}"/>
                 <geometry>
-                    <mesh scale="0.001 0.001 0.001" filename="file://$(find robotont_description)/meshes/gen3/frame_module_spacers.STL"/>
+                    <mesh filename="file://$(find robotont_description)/meshes/gen3/frame_module_spacers.STL"/>
                 </geometry>
                 <material name="spacers_material">
                     <color rgba="${spacers_color}"/>
