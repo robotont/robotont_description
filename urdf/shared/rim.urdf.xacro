@@ -3,7 +3,7 @@
     xmlns:xacro="http://ros.org/wiki/xacro">
     <xacro:include filename="$(find robotont_description)/urdf/shared/roller.urdf.xacro"/>
 
-    <xacro:property name="roller_radial_dist" value="0.0275" />
+    <xacro:property name="roller_radial_dist" value="0.0295" />
     <xacro:property name="roller_z_distance" value="0.008" />
     <xacro:property name="roller_init_angle" value="0" />
     <xacro:property name="wheel_height_offset" value="${wheel_center_height / 2}"/>
@@ -22,7 +22,7 @@
         <link name="${prefix}rim_${name}_link">
             <visual>
                 <geometry>
-                    <mesh filename="file://$(find robotont_description)/meshes/shared/rim.STL"/>
+                    <mesh filename="file://$(find robotont_description)/meshes/shared/2.75rim.STL"/>
                 </geometry>
                 <material name="rim_${name}_material">
                     <color rgba="${color}"/>
@@ -129,6 +129,26 @@
             no_of_roller="6"
             prefix="${prefix}"
         />
+        <xacro:roller_macro
+            parent="${name}"
+            color="${roller_color}"
+            radial_dist="${roller_radial_dist}"
+            z_distance="${roller_z_distance}"
+            z_distance_reflect="-1"
+            init_angle="${roller_init_angle}"
+            no_of_roller="7"
+            prefix="${prefix}"
+        />
+        <xacro:roller_macro
+            parent="${name}"
+            color="${roller_color}"
+            radial_dist="${roller_radial_dist}"
+            z_distance="${roller_z_distance}"
+            z_distance_reflect="-1"
+            init_angle="${roller_init_angle}"
+            no_of_roller="8"
+            prefix="${prefix}"
+        />
         <!-- Back rollers -->
         <xacro:roller_macro
             parent="${name}"
@@ -198,6 +218,26 @@
             z_distance_reflect="1"
             init_angle="${roller_init_angle}"
             no_of_roller="6"
+            prefix="${prefix}"
+        />
+        <xacro:roller_macro
+            parent="${name}"
+            color="${roller_color}"
+            radial_dist="${roller_radial_dist}"
+            z_distance="${roller_z_distance}"
+            z_distance_reflect="1"
+            init_angle="${roller_init_angle}"
+            no_of_roller="7"
+            prefix="${prefix}"
+        />
+        <xacro:roller_macro
+            parent="${name}"
+            color="${roller_color}"
+            radial_dist="${roller_radial_dist}"
+            z_distance="${roller_z_distance}"
+            z_distance_reflect="1"
+            init_angle="${roller_init_angle}"
+            no_of_roller="8"
             prefix="${prefix}"
         />
     </xacro:macro>
