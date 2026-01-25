@@ -22,7 +22,7 @@
         <link name="${prefix}rim_${name}_link">
             <visual>
                 <geometry>
-                    <mesh filename="file://$(find robotont_description)/meshes/shared/2.75rim.STL"/>
+                    <mesh filename="package://robotont_description/meshes/shared/2.75rim.STL"/>
                 </geometry>
                 <material name="rim_${name}_material">
                     <color rgba="${color}"/>

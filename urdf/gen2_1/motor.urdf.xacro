@@ -22,7 +22,7 @@
         <link name="${prefix}motor_mount_${name}_link">
             <visual>
                 <geometry>
-                    <mesh filename="file://$(find robotont_description)/meshes/gen2_1/motor_module.STL"/>
+                    <mesh filename="package://robotont_description/meshes/gen2_1/motor_module.STL"/>
                 </geometry>
                 <material name="motor_mount_${name}_material">
                     <color rgba="${color}"/>
@@ -43,7 +43,7 @@
         <link name="${prefix}motor_${name}_link">
             <visual>
                 <geometry>
-                    <mesh filename="file://$(find robotont_description)/meshes/gen2_1/motor.STL"/>
+                    <mesh filename="package://robotont_description/meshes/gen2_1/motor.STL"/>
                 </geometry>
                 <material name="motor_${name}_material">
                     <color rgba="${motor_color}"/>

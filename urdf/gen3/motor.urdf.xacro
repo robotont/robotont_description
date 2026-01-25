@@ -23,7 +23,7 @@
         <link name="${prefix}motor_${name}_link">
             <visual>
                 <geometry>
-                    <mesh filename="file://$(find robotont_description)/meshes/gen3/motor_module2.STL"/>
+                    <mesh filename="package://robotont_description/meshes/gen3/motor_module2.STL"/>
                 </geometry>
                 <material name="motor_${name}_material">
                     <color rgba="${color}"/>

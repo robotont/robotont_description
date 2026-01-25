@@ -16,7 +16,7 @@
         <link name="${prefix}roller_${name}_rim_${parent}_link">
             <visual>
                 <geometry>
-                    <mesh scale="0.001 0.001 0.001" filename="file://$(find robotont_description)/meshes/shared/2.75roller.STL"/>
+                    <mesh scale="0.001 0.001 0.001" filename="package://robotont_description/meshes/shared/2.75roller.STL"/>
                 </geometry>
                 <material name="roller_material">
                     <color rgba="${color}"/>

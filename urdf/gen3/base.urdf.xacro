@@ -21,7 +21,7 @@
             <visual>
                 <origin rpy="0 0 ${pi/2}" xyz="0 0 ${frame_elevation}"/>
                 <geometry>
-                    <mesh filename="file://$(find robotont_description)/meshes/gen3/frame_module_pla.STL"/>
+                    <mesh filename="package://robotont_description/meshes/gen3/frame_module_pla.STL"/>
                 </geometry>
                 <material name="base_material">
                     <color rgba="${color}"/>
@@ -29,7 +29,7 @@
             </visual>
             <collision>
                 <geometry>
-                    <mesh filename="file://$(find robotont_description)/meshes/shared/collision_body.STL"/>
+                    <mesh filename="package://robotont_description/meshes/shared/collision_body.STL"/>
                 </geometry>
                 <origin rpy="${pi/2} 0 ${pi/2}" xyz="0 0 ${frame_elevation}"/>
             </collision>
@@ -56,7 +56,7 @@
             <visual>
                 <origin rpy="0 0 ${pi/2}" xyz="0 0 ${frame_elevation}"/>
                 <geometry>
-                    <mesh filename="file://$(find robotont_description)/meshes/gen3/frame_module_spacers.STL"/>
+                    <mesh filename="package://robotont_description/meshes/gen3/frame_module_spacers.STL"/>
                 </geometry>
                 <material name="spacers_material">
                     <color rgba="${spacers_color}"/>
@@ -75,7 +75,7 @@
             <visual>
                 <origin rpy="0 0 ${pi/2}" xyz="0 0 0"/>
                 <geometry>
-                    <mesh filename="file://$(find robotont_description)/meshes/gen3/PCB.STL"/>
+                    <mesh filename="package://robotont_description/meshes/gen3/PCB.STL"/>
                 </geometry>
                 <material name="pcb_material">
                     <color rgba="${pcb_color}"/>
@@ -93,7 +93,7 @@
         <link name="${prefix}e_button_link">
             <visual>
                 <geometry>
-                    <mesh filename="file://$(find robotont_description)/meshes/gen3/e_stop_button.STL"/>
+                    <mesh filename="package://robotont_description/meshes/gen3/e_stop_button.STL"/>
                 </geometry>
                 <material name="e_button_material">
                     <color rgba="${e_button_color}"/>
@@ -115,7 +115,7 @@
         <link name="${prefix}power_button_link">
             <visual>
                 <geometry>
-                    <mesh filename="file://$(find robotont_description)/meshes/gen3/power_button.STL"/>
+                    <mesh filename="package://robotont_description/meshes/gen3/power_button.STL"/>
                 </geometry>
                 <material name="power_button_material">
                     <color rgba="${power_button_color}"/>
@@ -137,7 +137,7 @@
         <link name="${prefix}encoder_button_link">
             <visual>
                 <geometry>
-                    <mesh filename="file://$(find robotont_description)/meshes/gen3/encoder_button.STL"/>
+                    <mesh filename="package://robotont_description/meshes/gen3/encoder_button.STL"/>
                 </geometry>
                 <material name="encoder_button_material">
                     <color rgba="${power_button_color}"/>
@@ -159,7 +159,7 @@
         <link name="${prefix}battery_module_link">
             <visual>
                 <geometry>
-                    <mesh filename="file://$(find robotont_description)/meshes/gen3/battery_module.STL"/>
+                    <mesh filename="package://robotont_description/meshes/gen3/battery_module.STL"/>
                 </geometry>
                 <material name="battery_module_material">
                     <color rgba="${battery_module_color}"/>
@@ -181,7 +181,7 @@
         <link name="${prefix}screen_module_link">
             <visual>
                 <geometry>
-                    <mesh filename="file://$(find robotont_description)/meshes/gen3/ssd1306.STL"/>
+                    <mesh filename="package://robotont_description/meshes/gen3/ssd1306.STL"/>
                 </geometry>
                 <material name="screen_module_material">
                     <color rgba="${battery_module_color}"/>
